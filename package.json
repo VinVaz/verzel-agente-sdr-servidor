@@ -2,7 +2,7 @@
   "name": "agente-sdr-servidor",
   "version": "0.3.0",
   "description": "Server for Node.js express API with Typescript",
-  "main": "dist/index.ts",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": ""
@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "concurrently -k -n \"TSC,NODE\" -c \"yellow,cyan\" \"tsc --watch --preserveWatchOutput\" \"nodemon -q --watch build --delay 500ms build/index.js\"",
     "build": "rimraf ./dist && tsc",
-    "start": "node dist/index.ts",
+    "start": "node dist/index.js",
     "lint": "eslint . --ext .ts,.json",
     "lint:fix": "eslint --fix . --ext .ts,.json",
     "format": "npm run lint:fix && prettier --write \"src/**/*.ts\"",
