@@ -2,7 +2,6 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 
-import { bindModel } from './config/db';
 import genericErrorHandler from './middlewares/genericErrorHandler';
 import httpLogger from './middlewares/httpLogger';
 import notFoundHandler from './middlewares/notFoundHandler';
@@ -11,8 +10,6 @@ import transactionHandler from './middlewares/transactionHandler';
 import routes from './routes';
 
 const app: express.Application = express();
-
-bindModel();
 
 // --- Security and request handling middlewares ---
 app.use(cors());
