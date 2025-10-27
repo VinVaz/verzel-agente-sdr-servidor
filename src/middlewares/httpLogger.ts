@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import context from '../utils/context';
-import logger from '../utils/logger';
-import sanitizeError from '../utils/error/sanitizeError';
+
 import config from '../config/config'; // assuming your env config is here
+import context from '../utils/context';
+import sanitizeError from '../utils/error/sanitizeError';
+import logger from '../utils/logger';
 
 const httpLogger = (req: Request, res: Response, next: NextFunction) => {
   // Skip logging entirely for dev and test environments
@@ -28,7 +29,7 @@ const httpLogger = (req: Request, res: Response, next: NextFunction) => {
       userAgent: req.headers['user-agent'],
       duration: `${duration}ms`,
       query: sanitizeError(req.query as Record<string, unknown>),
-      body: sanitizeError(req.body),
+      body: sanitizeError(req.body)
     };
 
     if (status >= 500) {
