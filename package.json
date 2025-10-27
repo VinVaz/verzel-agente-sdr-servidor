@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "concurrently -k -n \"TSC,NODE\" -c \"yellow,cyan\" \"tsc --watch --preserveWatchOutput\" \"nodemon -q --watch build --delay 500ms build/index.js\"",
     "dev:pretty": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only --pretty src/index.ts",
-    "build": "npm run clean && npm run lint:fix && tsc",
+    "build": "npm install --include=dev && npm run clean && npm run lint:fix && tsc",
     "start": "node build/index.js",
     "clean": "rm -rf build",
     "lint": "eslint . --ext .ts,.json",
