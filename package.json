@@ -23,7 +23,8 @@
     "rollback": "knex migrate:rollback --knexfile=knexfile.ts --verbose",
     "seed": "knex seed:run --knexfile=knexfile.ts --verbose",
     "test": "cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --maxWorkers=1 --verbose",
-    "prepare": "husky install"
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky install; fi"
+
   },
   "lint-staged": {
     "*.{ts,json}": [
