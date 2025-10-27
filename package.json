@@ -2,7 +2,7 @@
   "name": "agente-sdr-servidor",
   "version": "0.3.0",
   "description": "Server for Node.js express API with Typescript",
-  "main": "build/index.js",
+  "main": "dist/index.ts",
   "repository": {
     "type": "git",
     "url": ""
@@ -11,22 +11,18 @@
     "node": ">= 20.9.0"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
-    "start": "node build/index.js",
-
+    "dev": "concurrently -k -n \"TSC,NODE\" -c \"yellow,cyan\" \"tsc --watch --preserveWatchOutput\" \"nodemon -q --watch build --delay 500ms build/index.js\"",
+    "build": "rimraf ./dist && tsc",
+    "start": "node dist/index.ts",
     "lint": "eslint . --ext .ts,.json",
     "lint:fix": "eslint --fix . --ext .ts,.json",
     "format": "npm run lint:fix && prettier --write \"src/**/*.ts\"",
-
     "migrate": "knex migrate:latest --knexfile=knexfile.ts --verbose",
     "rollback": "knex migrate:rollback --knexfile=knexfile.ts --verbose",
     "seed": "knex seed:run --knexfile=knexfile.ts --verbose",
     "test": "cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --maxWorkers=1 --verbose",
-
     "prepare": "echo 'Skipping husky install on Render or Windows'"
   },
-
   "lint-staged": {
     "*.{ts,json}": [
       "eslint --fix",
@@ -85,6 +81,7 @@
     "nodemon": "^3.1.0",
     "pino-pretty": "^13.1.2",
     "prettier": "^3.2.5",
+    "rimraf": "^6.0.1",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
